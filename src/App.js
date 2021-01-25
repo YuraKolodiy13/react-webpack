@@ -9,6 +9,8 @@ const App = () => (
     <h1>Hello React</h1>
     <p>Minimal React configuration.</p>
 
+    <p>wrong</p>
+
     <BrowserRouter>
       <Switch>
         <Route path='/' component={Home} exact/>
