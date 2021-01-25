@@ -10,6 +10,8 @@ const App = () => (
     <p>Minimal React configuration.</p>
 
     <p>wrong</p>
+    <p>wrong</p>
+    <p>wrong</p>
 
     <BrowserRouter>
       <Switch>
