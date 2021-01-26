@@ -1,0 +1,9 @@
+.container{
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Prompt', sans-serif;
+}
+img{
+  max-width: 100%;
+  height: auto;
+}

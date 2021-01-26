@@ -3,12 +3,15 @@ import ReactDOM from "react-dom"
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
+import './App.css';
 
 const App = () => (
-  <>
+  <div className='container'>
     <h1>Hello React</h1>
     <p>Minimal React configuration.</p>
 
+    <p>wrong</p>
+    <p>wrong</p>
     <p>wrong</p>
 
     <BrowserRouter>
@@ -17,7 +20,7 @@ const App = () => (
         <Route path='/about' component={About}/>
       </Switch>
     </BrowserRouter>
-  </>
+  </div>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
