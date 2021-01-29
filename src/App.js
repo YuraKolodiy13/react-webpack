@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import About from "./pages/About.jsx";
+import Home from "@/pages/Home";
+import About from "@/pages/About";
 import './App.css';
 
 const App = () => (
@@ -13,6 +13,8 @@ const App = () => (
     <p>wrong</p>
     <p>wrong</p>
     <p>wrong</p>
+    <p>fdsgfd</p>
+
 
     <BrowserRouter>
       <Switch>

@@ -1,6 +1,6 @@
 import React from "react"
 import {Link} from "react-router-dom";
-import img from '../assets/img/bg5.jpg'
+import img from '@/assets/img/bg5.jpg'
 
 const About = () => {
   return (
