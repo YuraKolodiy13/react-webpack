@@ -1,25 +1,28 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 
-console.log(process.env.NODE_ENV, 'process.env.NODE_ENV')
 const isDev = process.env.NODE_ENV === 'development';
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`;
 
 module.exports = {
   mode: 'development',
-  entry: "./src/App.js",
+  entry: "./src/App.jsx",
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].js',
+    filename: filename('js'),
     chunkFilename: '[id].[chunkhash].js'
   },
   optimization: {
     splitChunks: {
       chunks: 'all'
-    }
+    },
+    minimizer: isDev ? [] : [new OptimizeCssAssetsPlugin(), new TerserPlugin()]
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -33,7 +36,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"]
+          }
         }
       },
       {
@@ -42,7 +48,7 @@ module.exports = {
       },
       {
         test: /\.(scss|sass)$/,
-        use: ['sass-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(ttf|woff|woff2)$/,
@@ -56,8 +62,10 @@ module.exports = {
   },
   devServer: {
     port: 3111,
-    hot: isDev
+    hot: isDev,
+    historyApiFallback: true,
   },
+  devtool: isDev ? 'source-map' : false,
   plugins: [
     new HtmlWebPackPlugin({
       template: "./public/index.html" ,
@@ -71,7 +79,8 @@ module.exports = {
       ]
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
+      filename: filename('css')
+    }),
+    new CleanWebpackPlugin()
   ]
 };
